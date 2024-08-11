@@ -1,0 +1,73 @@
+{% extends "blank_layout.html" %}
+{% load static %}
+
+{% block banner %}
+    {% include "account_banner.html" %}
+{% endblock banner %}
+
+{% block content %}
+{% endblock content %}
+
+{% block extra_scripts %}
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Get references to the forms
+        const loginForm = document.getElementById('LoginForm');
+        const regForm = document.getElementById('RegForm');
+
+        // Get reference to the loader overlay
+        const loaderOverlay = document.getElementById('loader-overlay');
+
+        // Function to show the loader
+        function showLoader() {
+            if (loaderOverlay) {
+                loaderOverlay.style.display = 'block';
+                // Prevent scrolling
+                document.body.style.overflow = 'hidden';
+            }
+        }
+
+        // Attach submit event to login form
+        if (loginForm) {
+            loginForm.addEventListener('submit', function() {
+                showLoader();
+            });
+        }
+
+        // Attach submit event to register form
+        if (regForm) {
+            regForm.addEventListener('submit', function() {
+                showLoader();
+            });
+        }
+    });
+
+
+    var LoginForm = document.getElementById("LoginForm");
+    var RegForm = document.getElementById("RegForm");
+    var Indicator = document.getElementById("Indicator");
+    function register() {
+        RegForm.style.transform = "translatex(0px)";
+        LoginForm.style.transform = "translatex(0px)";
+        Indicator.style.transform = "translateX(100px)";
+
+    }
+    function login() {
+        RegForm.style.transform = "translatex(300px)";
+        LoginForm.style.transform = "translatex(300px)";
+        Indicator.style.transform = "translate(0px)";
+
+    }
+</script>
+
+{% if register %}
+    <script>
+        register()
+    </script>
+{% else %}
+    <script>
+        login()
+    </script>
+{% endif %}
+
+{% endblock extra_scripts %}
